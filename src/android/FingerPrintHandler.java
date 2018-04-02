@@ -1,13 +1,11 @@
 package com.cordova.plugin.android.fingerprintauth;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
 
-/**
- * Created by bduisenbayeva on 11/23/17.
- */
-
+@TargetApi(23)
 public class FingerPrintHandler extends FingerprintManager.AuthenticationCallback{
 
     static final long ERROR_TIMEOUT_MILLIS = 1600;
@@ -27,20 +25,6 @@ public class FingerPrintHandler extends FingerprintManager.AuthenticationCallbac
         this.mContext = context;
 
     }
-//
-//    public static class FingerPrintHandlerBuilder {
-//        private final FingerprintManager mFingerPrintManager;
-//        private final Context mContext;
-//
-//        public FingerPrintHandlerBuilder(Context context, FingerprintManager fingerprintManager) {
-//            mFingerPrintManager = fingerprintManager;
-//            mContext = context;
-//        }
-//
-//        public FingerPrintHandler build(Callback callback) {
-//            return new FingerPrintHandler(mContext, callback,mFingerPrintManager);
-//        }
-//    }
 
 
     public void startAuthentication(FingerprintManager mFingerPrintManager, FingerprintManager.CryptoObject mCryptoObject) {
@@ -51,19 +35,22 @@ public class FingerPrintHandler extends FingerprintManager.AuthenticationCallbac
 
     }
 
-    public void stopListening() {
+    public void stopAuthentication() {
         if (mCancellationSignal != null) {
             mSelfCancelled = true;
             mCancellationSignal.cancel();
             mCancellationSignal = null;
         }
+
     }
+
+
 
     @Override
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
 //        super.onAuthenticationSucceeded(result);
         FingerprintAuth.onAuthenticated(true /* withFingerprint */, result);
-//        dismissAllowingStateLoss();
+
     }
 
     @Override
