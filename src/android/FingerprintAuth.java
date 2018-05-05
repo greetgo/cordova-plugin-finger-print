@@ -602,6 +602,8 @@ public class FingerprintAuth extends CordovaPlugin {
       errorMessage = PluginError.JSON_EXCEPTION.name();
     } catch (UnsupportedEncodingException e) {
       e.printStackTrace();
+    }catch (IllegalStateException e) {
+      e.printStackTrace();
     }
 
     if (createdResultJson) {

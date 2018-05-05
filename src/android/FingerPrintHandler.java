@@ -5,6 +5,8 @@ import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
 
+import static android.Manifest.permission.USE_FINGERPRINT;
+
 @TargetApi(23)
 public class FingerPrintHandler extends FingerprintManager.AuthenticationCallback{
 
@@ -25,7 +27,6 @@ public class FingerPrintHandler extends FingerprintManager.AuthenticationCallbac
         this.mContext = context;
 
     }
-
 
     public void startAuthentication(FingerprintManager mFingerPrintManager, FingerprintManager.CryptoObject mCryptoObject) {
 
